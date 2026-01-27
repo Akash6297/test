@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Join Our Group</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f5f7fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    form {
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      width: 350px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+    }
+    button {
+      background: #007bff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<form id="joinForm">
+  <h2>Join Our Group</h2>
+  <input type="text" name="name" placeholder="Full Name" required>
+  <input type="tel" name="phone" placeholder="Phone Number" required>
+  <input type="email" name="email" placeholder="Email Address" required>
+  <input type="text" name="address" placeholder="Address" required>
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+const scriptURL = "PASTE_YOUR_APPS_SCRIPT_URL";
+
+document.getElementById("joinForm").addEventListener("submit", e => {
+  e.preventDefault();
+  fetch(scriptURL, {
+    method: "POST",
+    body: new FormData(e.target)
+  })
+  .then(() => {
+    alert("Thank you! Check your email 📩");
+    e.target.reset();
+  })
+  .catch(err => alert("Error: " + err));
+});
+</script>
+
+</body>
+</html>
