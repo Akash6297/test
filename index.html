@@ -39,31 +39,40 @@
   <input type="tel" name="phone" placeholder="Phone Number" required>
   <input type="email" name="email" placeholder="Email Address" required>
   <input type="text" name="address" placeholder="Address" required>
+  <div class="g-recaptcha" data-sitekey="6Leyn1csAAAAADYtMu9XXnvFr_AfWtv1kR3HMqsN"></div>
   <button type="submit">Submit</button>
 </form>
 
 <script>
-const scriptURL = "https://script.google.com/macros/s/AKfycby_lFKCBFkOSQamXjR4jFrDcXeq6y2ILHinn_x_LDBORnbtBnC7rJYzxOC3cHToL2A6/exec";
+const scriptURL = "https://script.google.com/macros/s/AKfycbym3FBvgBgAIOB_ch6bfIOsTSsWtEiWM14rBUche2WNzQzU3SYJAnlFMiovqX9Fj9yV/exec";
 
-document.getElementById("joinForm").addEventListener("submit", function(e) {
+
+document.getElementById("joinForm").addEventListener("submit", function (e) {
   e.preventDefault();
+
+  const captcha = grecaptcha.getResponse();
+  if (!captcha) {
+    alert("Please verify that you are not a robot 🤖");
+    return;
+  }
 
   fetch(scriptURL, {
     method: "POST",
     body: new FormData(this)
   })
-  .then(res => res.text())
-  .then(data => {
-    if (data.includes("SUCCESS")) {
-      window.location.href = "success.html";
-    } else {
-      alert("Submission failed");
-    }
-  })
-  .catch(() => alert("Error submitting form"));
+    .then(res => res.text())
+    .then(data => {
+      if (data.includes("SUCCESS")) {
+        window.location.href = "success.html";
+      } else {
+        alert(data);
+      }
+    })
+    .catch(() => alert("Submission failed"));
 });
 </script>
 
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 </body>
 </html>
