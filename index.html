@@ -43,21 +43,24 @@
 </form>
 
 <script>
-const scriptURL = "https://script.google.com/macros/s/AKfycbzd5NfaJJJ5vctS-437kBgjNmESAFxVwklh6jAU-TJVsgBrIBkc5LiIiDiVAQ6T9no4/exec";
+const scriptURL = "https://script.google.com/macros/s/AKfycbzPkVQrdQupYAqD0CogjYu7KJYvDdstGYNa3QdfgMJi3xdql1lBV3u6ic-nxkfpWrfx/exec";
 
-document.getElementById("joinForm").addEventListener("submit", e => {
+document.getElementById("joinForm").addEventListener("submit", function(e) {
   e.preventDefault();
+
   fetch(scriptURL, {
     method: "POST",
-    body: new FormData(e.target)
+    body: new FormData(this)
   })
-  .then(() => {
-    alert("Thank you! Check your email 📩");
-    e.target.reset();
+  .then(res => res.text())
+  .then(data => {
+    alert("Submitted successfully! Check your email 📩");
+    this.reset();
   })
   .catch(err => alert("Error: " + err));
 });
 </script>
+
 
 </body>
 </html>
