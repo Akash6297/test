@@ -1,78 +1,75 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Join Our Group</title>
-  <style>
-    body {
-      font-family: Arial;
-      background: #f5f7fa;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    form {
-      background: #fff;
-      padding: 25px;
-      border-radius: 10px;
-      width: 350px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    }
-    input, button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-    }
-    button {
-      background: #007bff;
-      color: #fff;
-      border: none;
-      cursor: pointer;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Our Group</title>
+    <style>
+        :root {
+            --orange: #FF8C00;
+            --sea-green: #2E8B57;
+            --light-bg: #f4f9f7;
+            --dark-text: #2c3e50;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0; padding: 0;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 500px; width: 90%;
+            text-align: center;
+            border-top: 8px solid var(--orange);
+        }
+        h1 { color: var(--sea-green); margin-bottom: 10px; }
+        p { color: #666; margin-bottom: 30px; }
+        
+        /* Modern Button / Form Link Style */
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--orange), #ffae42);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 140, 0, 0.3);
+        }
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 140, 0, 0.4);
+        }
+        .footer { margin-top: 30px; font-size: 0.8rem; color: var(--sea-green); }
+        
+        /* Embed Styling if you want the form directly on page */
+        iframe {
+            width: 100%; border: none; min-height: 600px;
+            border-radius: 10px;
+        }
+    </style>
 </head>
 <body>
 
-<form id="joinForm">
-  <h2>Join Our Group</h2>
-  <input type="text" name="name" placeholder="Full Name" required>
-  <input type="tel" name="phone" placeholder="Phone Number" required>
-  <input type="email" name="email" placeholder="Email Address" required>
-  <input type="text" name="address" placeholder="Address" required>
-  <div class="g-recaptcha" data-sitekey="6Ld5pFcsAAAAALYm_i_jRwrEDWo82N6yVtYOHy8d"></div>
-  <button type="submit">Submit</button>
-</form>
+<div class="container">
+    <h1>Welcome to Our Group! 🌿</h1>
+    <p>Please fill out the form below to join. You will receive a personalized <b>Thank You PDF</b> in your email immediately.</p>
+    
+    <!-- Replace this URL with your Google Form Link -->
+    <iframe src="YOUR_GOOGLE_FORM_URL?embedded=true">Loading…</iframe>
 
-<script>
-const scriptURL = "https://script.google.com/macros/s/AKfycbzame4igNuEjszOBtuzKPfjz2-th7XM8WyuXomrhZ5c3cuXXAxiyMkgUyMEj-Kay8Hm/exec";
-
-
-document.getElementById("joinForm").addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  const captcha = grecaptcha.getResponse();
-  if (!captcha) {
-    alert("Please verify that you are not a robot 🤖");
-    return;
-  }
-
-  fetch(scriptURL, {
-    method: "POST",
-    body: new FormData(this)
-  })
-    .then(res => res.text())
-    .then(data => {
-      if (data.includes("SUCCESS")) {
-        window.location.href = "success.html";
-      } else {
-        alert(data);
-      }
-    })
-    .catch(() => alert("Submission failed"));
-});
-</script>
-
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <div class="footer">
+        Powered by Sea-Green & Orange Design
+    </div>
+</div>
 
 </body>
 </html>
